@@ -43,7 +43,7 @@ export const Navbar: React.FC<Props> = ({
             </div>
             <div>
               <h1 className="text-base sm:text-lg font-extrabold text-white tracking-tight flex items-center gap-2">
-                AI Concept Playground
+                AgentAtlas
                 <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">
                   2026 Interactive Edition
                 </span>

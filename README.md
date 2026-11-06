@@ -1,6 +1,6 @@
-# 🔮 AI Concept Playground (2026 Edition)
+# 🔮 AgentAtlas (2026 Edition)
 
-An interactive, visual "AI playground for normal users"—not another wall-of-text documentation website. 
+The interactive, visual AI playground for normal users and builders—not another wall-of-text documentation website. 
 
 Explore **harnesses, MCP, context engineering, swarms, RAG 2.0, memory layers, guardrails, and loop engineering** through floating organic bubbles, 5-part lesson cards, animated interactive mini-simulations, relatable analogies, and tool-by-tool comparisons.
 
