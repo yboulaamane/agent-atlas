@@ -1,6 +1,6 @@
 import React from 'react';
 import { LearningPath, LearningPathId } from '../types';
-import { Sparkles, ArrowRight, Compass } from 'lucide-react';
+import { Sparkles, Compass } from 'lucide-react';
 
 interface Props {
   currentPath: LearningPath;
@@ -17,18 +17,18 @@ export const LearningPathBanner: React.FC<Props> = ({
 }) => {
   if (currentPath.id === 'all') {
     return (
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl bg-slate-900/40 border border-slate-800/80 gap-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl border transition-colors bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm gap-3">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-            <Compass className="w-5 h-5" />
+          <div className="p-2 rounded-xl border bg-neutral-100 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">
+            <Compass className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              Viewing Full AI Universe
-              <span className="text-xs font-normal text-slate-400">({totalCount} interconnected concepts)</span>
+            <h3 className="text-sm font-bold text-neutral-900 dark:text-white flex items-center gap-2">
+              Viewing All Concepts
+              <span className="text-xs font-normal text-neutral-500">({totalCount} interconnected terms)</span>
             </h3>
-            <p className="text-xs text-slate-400">
-              Floating bubbles show how modern agent harnesses, MCP, RAG 2.0, swarms, and safety layers link together.
+            <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              Interactive floating graph showing how harnesses, MCP, RAG 2.0, swarms, and memory connect.
             </p>
           </div>
         </div>
@@ -36,7 +36,7 @@ export const LearningPathBanner: React.FC<Props> = ({
         <div className="flex items-center gap-2 text-xs">
           <button
             onClick={() => onSelectPath('chatbots')}
-            className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
+            className="px-3 py-1.5 rounded-xl border text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors font-medium"
           >
             Start with Chatbot Basics →
           </button>
@@ -46,22 +46,22 @@ export const LearningPathBanner: React.FC<Props> = ({
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl bg-cyan-950/30 border border-cyan-500/40 gap-3">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl border transition-colors bg-neutral-50 dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm gap-3">
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
-          <Sparkles className="w-5 h-5 animate-pulse" />
+        <div className="p-2 rounded-xl border bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white">
+          <Sparkles className="w-4 h-4" />
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 bg-cyan-900/60 px-2 py-0.5 rounded-full border border-cyan-700">
-              Guided Path Active
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-neutral-700">
+              Curated Path
             </span>
-            <h3 className="text-sm font-bold text-white">
+            <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
               {currentPath.title}
             </h3>
           </div>
-          <p className="text-xs text-cyan-100/80 mt-0.5">
-            {currentPath.description} ({activeCount} curated concepts highlighted).
+          <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+            {currentPath.description} ({activeCount} concepts active).
           </p>
         </div>
       </div>
@@ -69,10 +69,10 @@ export const LearningPathBanner: React.FC<Props> = ({
       <div className="flex items-center gap-2 text-xs">
         <button
           onClick={() => onSelectPath('all')}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold transition-all shadow-md shadow-cyan-500/20"
+          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl font-medium transition-all shadow-sm bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-100"
         >
           <Compass className="w-3.5 h-3.5" />
-          Explore Everything ({totalCount} concepts)
+          Explore Everything ({totalCount})
         </button>
       </div>
     </div>

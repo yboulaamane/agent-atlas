@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CONCEPTS } from './data/conceptsData';
-import { LEARNING_PATHS, CLUSTERS } from './data/clustersData';
+import { LEARNING_PATHS } from './data/clustersData';
 import { Concept, LearningPathId } from './types';
 import { Navbar } from './components/Navbar';
 import { LearningPathBanner } from './components/LearningPathBanner';
@@ -17,10 +17,40 @@ export function App() {
   const [reducedMotion, setReducedMotion] = useState<boolean>(false);
   const [isFreeApiModalOpen, setIsFreeApiModalOpen] = useState<boolean>(false);
 
+  // Theme state: dark or light
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    try {
+      const saved = localStorage.getItem('agentatlas_theme');
+      if (saved === 'dark' || saved === 'light') return saved;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    } catch {
+      return 'dark';
+    }
+  });
+
+  // Apply theme class to document
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    try {
+      localStorage.setItem('agentatlas_theme', theme);
+    } catch {
+      // ignore
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   // Local storage state for progress tracking
   const [masteredIds, setMasteredIds] = useState<string[]>(() => {
     try {
-      const saved = localStorage.getItem('ai_glossary_mastered');
+      const saved = localStorage.getItem('agentatlas_mastered');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -29,7 +59,7 @@ export function App() {
 
   const [challengeSolvedIds, setChallengeSolvedIds] = useState<string[]>(() => {
     try {
-      const saved = localStorage.getItem('ai_glossary_solved');
+      const saved = localStorage.getItem('agentatlas_solved');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -39,7 +69,7 @@ export function App() {
   // Save to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem('ai_glossary_mastered', JSON.stringify(masteredIds));
+      localStorage.setItem('agentatlas_mastered', JSON.stringify(masteredIds));
     } catch {
       // ignore
     }
@@ -47,29 +77,25 @@ export function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('ai_glossary_solved', JSON.stringify(challengeSolvedIds));
+      localStorage.setItem('agentatlas_solved', JSON.stringify(challengeSolvedIds));
     } catch {
       // ignore
     }
   }, [challengeSolvedIds]);
 
-  // Current learning path
   const currentPath = LEARNING_PATHS.find((p) => p.id === selectedPathId) || LEARNING_PATHS[0];
   const activePathConceptIds = currentPath.conceptIds;
 
-  // Toggle mastered status
   const handleToggleMastered = (id: string) => {
     setMasteredIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
 
-  // Mark challenge solved
   const handleMarkChallengeSolved = (id: string) => {
     setChallengeSolvedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
   };
 
-  // Reset progress helper
   const handleResetProgress = () => {
     if (window.confirm('Reset all learned concepts and quiz progress?')) {
       setMasteredIds([]);
@@ -78,7 +104,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
+    <div className="min-h-screen flex flex-col transition-colors duration-200 bg-[#fafafa] text-neutral-900 dark:bg-[#09090b] dark:text-neutral-100 selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-neutral-900">
       {/* Top Header */}
       <Navbar
         activeView={activeView}
@@ -92,11 +118,13 @@ export function App() {
         totalConcepts={CONCEPTS.length}
         solvedCount={challengeSolvedIds.length}
         onOpenFreeApis={() => setIsFreeApiModalOpen(true)}
+        theme={theme}
+        onToggleTheme={toggleTheme}
       />
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
-        {/* Guided Learning Path Banner */}
+        {/* Curated Learning Path Banner */}
         <LearningPathBanner
           currentPath={currentPath}
           onSelectPath={setSelectedPathId}
@@ -115,21 +143,28 @@ export function App() {
               reducedMotion={reducedMotion}
               masteredIds={masteredIds}
               challengeSolvedIds={challengeSolvedIds}
+              theme={theme}
             />
 
-            {/* Quick helper banner below bubble map */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-400">
-              <div className="p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
-                <span className="font-bold text-cyan-300 block mb-0.5">🫧 Click any floating bubble</span>
-                Opens a 5-part lesson card: plain language explanation, relatable analogy, animated demo, practical touchpoint & quick challenge.
+            {/* Minimalist Cards Below Map */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+              <div className="p-4 rounded-2xl border transition-colors bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm">
+                <span className="font-bold text-neutral-900 dark:text-white block mb-0.5">Explore Floating Nodes</span>
+                <p className="text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                  Click any bubble to view 5-part cards: plain-language explanation, everyday analogy, animated demo, real-world context, and challenge.
+                </p>
               </div>
-              <div className="p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
-                <span className="font-bold text-violet-300 block mb-0.5">⚙️ "Find It In My Tool"</span>
-                Switch between Claude, Cursor/Codex, ChatGPT, Grok, and Open Source to see how each concept is named and configured.
+              <div className="p-4 rounded-2xl border transition-colors bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm">
+                <span className="font-bold text-neutral-900 dark:text-white block mb-0.5">Tool Comparison Engine</span>
+                <p className="text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                  Switch between Claude, Cursor/Codex, ChatGPT, Grok, and Open Source to see how each tool exposes the underlying concept.
+                </p>
               </div>
-              <div className="p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
-                <span className="font-bold text-emerald-300 block mb-0.5">🔒 100% Client-Side & Fast</span>
-                Runs completely in your browser with zero logins, no live API keys needed, and ready for instant GitHub + Vercel deployment.
+              <div className="p-4 rounded-2xl border transition-colors bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm">
+                <span className="font-bold text-neutral-900 dark:text-white block mb-0.5">Zero Cost & Client-Side</span>
+                <p className="text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                  100% private, runs offline in your browser without requiring logins, accounts, or live API keys.
+                </p>
               </div>
             </div>
           </div>
@@ -143,7 +178,7 @@ export function App() {
         )}
       </main>
 
-      {/* Modal / Card overlay if concept is selected */}
+      {/* Modal / Card overlay */}
       {selectedConcept && (
         <ConceptModal
           concept={selectedConcept}
@@ -168,16 +203,16 @@ export function App() {
       />
 
       {/* Footer */}
-      <footer className="mt-12 border-t border-slate-800/80 bg-slate-950 py-8 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <footer className="mt-12 border-t transition-colors bg-white dark:bg-[#09090b] border-neutral-200 dark:border-neutral-850 py-8 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500 dark:text-neutral-400">
           <div className="flex items-center gap-3">
-            <span className="text-base">🔮</span>
+            <span className="font-mono text-sm">▲</span>
             <div>
-              <p className="text-slate-300 font-semibold">
-                AI Concept Playground • Designed for normal users & builders
+              <p className="font-semibold text-neutral-900 dark:text-white">
+                AgentAtlas • Interactive visual playground for modern AI & autonomous systems
               </p>
-              <p className="text-[11px] text-slate-500">
-                Covering the complete 2026 landscape: Harnesses, MCP, Loop Engineering, Swarms, RAG 2.0 & beyond.
+              <p className="text-[11px] text-neutral-400 dark:text-neutral-500">
+                Covering the complete 2026 landscape: Harnesses, MCP, Loop Engineering, Swarms, RAG 2.0 & Free APIs.
               </p>
             </div>
           </div>
@@ -185,23 +220,23 @@ export function App() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsFreeApiModalOpen(true)}
-              className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+              className="font-medium text-neutral-900 dark:text-white hover:underline transition-colors flex items-center gap-1"
             >
               <Gift className="w-3.5 h-3.5" />
-              Free AI APIs Guide
+              Free APIs Guide
             </button>
-            <span className="text-slate-700">|</span>
+            <span className="text-neutral-300 dark:text-neutral-800">|</span>
             {(masteredIds.length > 0 || challengeSolvedIds.length > 0) && (
               <>
                 <button
                   onClick={handleResetProgress}
-                  className="flex items-center gap-1 text-slate-400 hover:text-red-400 transition-colors"
+                  className="flex items-center gap-1 hover:text-rose-500 transition-colors"
                   title="Reset localStorage progress"
                 >
                   <RefreshCw className="w-3 h-3" />
                   Reset Progress
                 </button>
-                <span className="text-slate-700">|</span>
+                <span className="text-neutral-300 dark:text-neutral-800">|</span>
               </>
             )}
             <span>Reviewed November 2026</span>
