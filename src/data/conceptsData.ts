@@ -1755,5 +1755,71 @@ export const CONCEPTS: Concept[] = [
     ],
     connectedConceptIds: ['ai-gateways', 'distillation', 'context-engineering'],
     tags: ['Cost', 'Prompt Caching', 'Efficiency']
+  },
+  {
+    id: 'ai-apis',
+    title: 'AI APIs & Free Tiers',
+    shortLabel: 'AI APIs & Free',
+    cluster: 'tools-connections',
+    isImageOriginal: false,
+    isBeginnerPrereq: true,
+    order: 29,
+    plainExplanation: 'An API (Application Programming Interface) is a digital messenger that lets your apps send instructions to an AI and receive answers back in milliseconds. Many premier AI providers offer generous free tiers so beginners and builders can create apps without spending a dime or entering a credit card.',
+    analogy: {
+      headline: 'The Restaurant Waiter & The Free Tasting Menu',
+      story: 'You don’t need to buy a $50,000 industrial kitchen to enjoy Michelin-starred food. You sit at a table, tell the waiter your order (the API request), the kitchen prepares it, and the waiter brings your dish (the API response). Free tiers are like a complimentary tasting flight given to welcoming new diners.'
+    },
+    visualType: 'free-api-flow',
+    practicalRelevance: {
+      whereEncountered: 'Google AI Studio, Groq Cloud, OpenRouter, GitHub Models, and local tools like Ollama',
+      realWorldExample: 'Grabbing a free API key from Google AI Studio or Groq to build a custom study flashcard app in 15 minutes at $0.00 cost.'
+    },
+    quickChallenge: {
+      question: 'Which of the following is an industry best practice for protecting your AI API keys?',
+      scenario: 'You are publishing your first AI web app project on GitHub.',
+      options: [
+        {
+          text: 'Hardcode the API key directly into your frontend JavaScript file so anyone visiting your website can read it.',
+          isCorrect: false,
+          explanation: 'Never do this! Public keys get scraped by automated bots within seconds and exhaust your limits.'
+        },
+        {
+          text: 'Keep the key in a local `.env` environment variable file that is added to `.gitignore`, or use backend server proxy routes.',
+          isCorrect: true,
+          explanation: 'Bingo! Environment variables and backend proxies prevent secret API keys from leaking to the public.'
+        },
+        {
+          text: 'Post the API key as a tweet so your team can easily copy and paste it.',
+          isCorrect: false,
+          explanation: 'Posting keys publicly is the fastest way to have your account suspended or compromise your quotas.'
+        }
+      ]
+    },
+    goDeeper: {
+      technicalSummary: 'AI APIs communicate via HTTP POST requests transmitting JSON payloads containing models, messages arrays, temperatures, and optional tool schemas. Streaming responses use Server-Sent Events (SSE) to deliver tokens incrementally.',
+      nuanceOrAmbiguity: 'Free tiers differ from paid tiers primarily in rate limits (Requests Per Minute - RPM, and Tokens Per Minute - TPM). Some free tiers (like Google AI Studio free tier) may use non-sensitive prompt data to train future models, whereas paid commercial tiers guarantee zero data retention.',
+      architectureNotes: [
+        'Google AI Studio (Gemini 1.5 Flash/Pro): 15 RPM free, 1M context, no credit card required',
+        'Groq Cloud: Ultra-fast LPU inference (500+ tokens/sec) with free developer access for Llama 3.3 70B & Mixtral',
+        'OpenRouter Free Models: Access to open-weight models with the `:free` suffix (Llama 3.3, DeepSeek R1, Mistral)',
+        'GitHub Models: Free prototyping playground in GitHub Codespaces with GPT-4o and Claude 3.5 Sonnet',
+        'Ollama: 100% free, private, offline API running locally on your laptop (OpenAI-compatible `localhost:11434/v1`)'
+      ],
+      sources: [
+        { title: 'Google AI Studio Quickstart', description: 'Free Gemini API keys for developers (aistudio.google.com)' },
+        { title: 'Groq Cloud Developer Console', description: 'Sub-second LPU inference free tiers (console.groq.com)' },
+        { title: 'OpenRouter Free Model Catalog', description: 'Zero-cost open router endpoints (openrouter.ai/models?max_price=0)' }
+      ],
+      lastReviewed: 'November 2026'
+    },
+    toolExamples: [
+      { platform: 'claude', platformName: 'Claude', featureName: 'Anthropic Console Free Credits', status: 'supported', description: 'Provides initial free evaluation credits upon phone verification for developer testing.', howToFind: 'console.anthropic.com' },
+      { platform: 'cursor', platformName: 'Cursor / Codex', featureName: 'Custom API Key & Ollama Mode', status: 'supported', description: 'Input your own free OpenAI-compatible API key or connect directly to local Ollama.', howToFind: 'Cursor Settings > Models > OpenAI API Key' },
+      { platform: 'chatgpt', platformName: 'ChatGPT', featureName: 'GitHub Models Free Tier', status: 'supported', description: 'Access GPT-4o for free through GitHub Models using your GitHub Personal Access Token.', howToFind: 'github.com/marketplace/models' },
+      { platform: 'grok', platformName: 'Grok', featureName: 'xAI Promotional Credits', status: 'supported', description: 'Free promotional developer credits allocated to test Grok-2 API endpoints.', howToFind: 'console.x.ai' },
+      { platform: 'opensource', platformName: 'Open Source', featureName: 'Ollama & Groq Cloud', status: 'supported', description: 'Run completely free locally via `ollama run llama3` or get free cloud API keys from Groq Cloud and OpenRouter.', howToFind: 'ollama.com and console.groq.com' }
+    ],
+    connectedConceptIds: ['models', 'prompts-tokens', 'tool-use', 'ai-gateways'],
+    tags: ['APIs', 'Free Tiers', 'Groq', 'Gemini', 'Ollama', 'OpenRouter']
   }
 ];

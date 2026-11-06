@@ -99,7 +99,7 @@ export const LEARNING_PATHS: LearningPath[] = [
       'multi-agent-systems', 'swarms',
       'fine-tuning', 'synthetic-data', 'distillation',
       'eval-frameworks', 'guardrails', 'observability',
-      'ai-gateways', 'cost-optimization'
+      'ai-gateways', 'cost-optimization', 'ai-apis'
     ],
   },
   {
@@ -107,14 +107,14 @@ export const LEARNING_PATHS: LearningPath[] = [
     title: 'I Use Chatbots',
     description: 'Essential concepts for daily users of ChatGPT, Claude, and Gemini.',
     icon: 'MessageSquare',
-    conceptIds: ['models', 'prompts-tokens', 'context-window', 'hallucinations', 'rag-2', 'memory-layers', 'guardrails', 'prompt-optimization'],
+    conceptIds: ['models', 'prompts-tokens', 'context-window', 'hallucinations', 'rag-2', 'memory-layers', 'guardrails', 'prompt-optimization', 'ai-apis'],
   },
   {
     id: 'coding-assistants',
     title: 'I Use Coding Assistants',
     description: 'Master how tools like Cursor, GitHub Copilot, Codex, and Claude Code operate under the hood.',
     icon: 'Code',
-    conceptIds: ['context-engineering', 'skills', 'tool-use', 'function-calling', 'mcp', 'harness', 'observability'],
+    conceptIds: ['context-engineering', 'skills', 'tool-use', 'function-calling', 'mcp', 'harness', 'ai-apis', 'observability'],
   },
   {
     id: 'agents',

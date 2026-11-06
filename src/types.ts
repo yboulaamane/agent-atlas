@@ -80,6 +80,7 @@ export type VisualDemoType =
   | 'eval-benchmark'
   | 'multi-agent-collab'
   | 'synthetic-data'
+  | 'free-api-flow'
   | 'generic-flow';
 
 export interface Concept {

@@ -638,7 +638,68 @@ export const ConceptVisualDemo: React.FC<Props> = ({ type, conceptTitle }) => {
           </div>
         )}
 
-        {/* 18. FINE TUNE & DISTILLATION & GENERIC FALLBACK */}
+        {/* 18. FREE API FLOW DEMO */}
+        {type === 'free-api-flow' && (
+          <div className="w-full max-w-md space-y-3 text-xs">
+            {/* Free Provider Selector */}
+            <div className="flex items-center justify-between gap-1.5 p-1 bg-slate-950 rounded-xl border border-slate-800">
+              {[
+                { id: 'gemini', name: 'Gemini (Google)', badge: '15 RPM Free' },
+                { id: 'groq', name: 'Groq Cloud', badge: '500 t/s Free' },
+                { id: 'openrouter', name: 'OpenRouter', badge: ':free tag' },
+                { id: 'ollama', name: 'Ollama', badge: '100% Offline' },
+              ].map((prov) => (
+                <button
+                  key={prov.id}
+                  onClick={() => setCustomOption(prov.id)}
+                  className={`flex-1 py-1.5 px-2 rounded-lg text-center transition-all ${
+                    (customOption === prov.id || (customOption === 'default' && prov.id === 'gemini'))
+                      ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/50 shadow-sm'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                  }`}
+                >
+                  <div className="font-semibold text-[11px] truncate">{prov.name}</div>
+                  <div className="text-[9px] text-emerald-400 font-mono">{prov.badge}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Simulated Free Request / Response */}
+            <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 font-mono space-y-2 text-[11px]">
+              <div className="flex items-center justify-between text-slate-500 border-b border-slate-800/80 pb-1.5">
+                <span>POST https://api.provider.com/v1/chat/completions</span>
+                <span className="text-emerald-400 font-bold">Cost: $0.00</span>
+              </div>
+
+              <div className="text-slate-400">
+                <span className="text-cyan-400">Headers:</span> {`{ "Authorization": "Bearer free_key_..." }`}
+              </div>
+
+              <div className="text-amber-300">
+                <span className="text-cyan-400">Payload:</span> {`{ "model": "${
+                  customOption === 'groq' ? 'llama-3.3-70b-versatile' :
+                  customOption === 'openrouter' ? 'deepseek/deepseek-r1:free' :
+                  customOption === 'ollama' ? 'llama3:latest' : 'gemini-1.5-flash'
+                }", "prompt": "Explain gravity in 1 line." }`}
+              </div>
+
+              <div className="p-2 rounded bg-slate-900/90 border border-emerald-500/30 text-emerald-300 font-sans text-xs">
+                💬 <strong>AI Response:</strong> "Gravity is the curvature of spacetime pulling mass together."
+                <div className="mt-1 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                  <span>Tokens: 14</span>
+                  <span>Latency: {customOption === 'groq' ? '45ms' : customOption === 'ollama' ? '18ms (Local)' : '210ms'}</span>
+                  <span className="text-emerald-400">Free Tier Quota: Active</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center text-[11px] text-slate-400">
+              💡 <em>No credit card required. Ideal for beginners building their first chatbot, portfolio, or coding tool.</em>
+            </div>
+          </div>
+        )}
+
+        {/* 19. FINE TUNE & DISTILLATION & GENERIC FALLBACK */}
         {(type === 'fine-tune' || type === 'distillation' || type === 'synthetic-data' || type === 'multi-agent-collab' || type === 'generic-flow') && (
           <div className="w-full max-w-md text-center p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
             <div className="flex items-center justify-center gap-3">

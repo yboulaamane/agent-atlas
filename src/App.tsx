@@ -7,13 +7,15 @@ import { LearningPathBanner } from './components/LearningPathBanner';
 import { BubbleUniverse } from './components/BubbleUniverse';
 import { ListView } from './components/ListView';
 import { ConceptModal } from './components/ConceptModal';
-import { RefreshCw } from 'lucide-react';
+import { FreeApiModal } from './components/FreeApiModal';
+import { RefreshCw, Gift } from 'lucide-react';
 
 export function App() {
   const [activeView, setActiveView] = useState<'map' | 'list'>('map');
   const [selectedConcept, setSelectedConcept] = useState<Concept | null>(null);
   const [selectedPathId, setSelectedPathId] = useState<LearningPathId>('all');
   const [reducedMotion, setReducedMotion] = useState<boolean>(false);
+  const [isFreeApiModalOpen, setIsFreeApiModalOpen] = useState<boolean>(false);
 
   // Local storage state for progress tracking
   const [masteredIds, setMasteredIds] = useState<string[]>(() => {
@@ -89,6 +91,7 @@ export function App() {
         masteredCount={masteredIds.length}
         totalConcepts={CONCEPTS.length}
         solvedCount={challengeSolvedIds.length}
+        onOpenFreeApis={() => setIsFreeApiModalOpen(true)}
       />
 
       {/* Main Container */}
@@ -154,6 +157,16 @@ export function App() {
         />
       )}
 
+      {/* Free APIs Modal Guide */}
+      <FreeApiModal
+        isOpen={isFreeApiModalOpen}
+        onClose={() => setIsFreeApiModalOpen(false)}
+        onOpenConcept={() => {
+          const c = CONCEPTS.find((item) => item.id === 'ai-apis');
+          if (c) setSelectedConcept(c);
+        }}
+      />
+
       {/* Footer */}
       <footer className="mt-12 border-t border-slate-800/80 bg-slate-950 py-8 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
@@ -170,17 +183,27 @@ export function App() {
           </div>
 
           <div className="flex items-center gap-4">
-            {(masteredIds.length > 0 || challengeSolvedIds.length > 0) && (
-              <button
-                onClick={handleResetProgress}
-                className="flex items-center gap-1 text-slate-400 hover:text-red-400 transition-colors"
-                title="Reset localStorage progress"
-              >
-                <RefreshCw className="w-3 h-3" />
-                Reset Progress
-              </button>
-            )}
+            <button
+              onClick={() => setIsFreeApiModalOpen(true)}
+              className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+            >
+              <Gift className="w-3.5 h-3.5" />
+              Free AI APIs Guide
+            </button>
             <span className="text-slate-700">|</span>
+            {(masteredIds.length > 0 || challengeSolvedIds.length > 0) && (
+              <>
+                <button
+                  onClick={handleResetProgress}
+                  className="flex items-center gap-1 text-slate-400 hover:text-red-400 transition-colors"
+                  title="Reset localStorage progress"
+                >
+                  <RefreshCw className="w-3 h-3" />
+                  Reset Progress
+                </button>
+                <span className="text-slate-700">|</span>
+              </>
+            )}
             <span>Reviewed November 2026</span>
           </div>
         </div>
