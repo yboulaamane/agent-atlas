@@ -110,27 +110,27 @@ export const FreeApiModal: React.FC<Props> = ({ isOpen, onClose, onOpenConcept }
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-y-auto bg-black/60 backdrop-blur-sm animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/40 backdrop-blur-md animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-3xl border shadow-2xl overflow-hidden bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-neutral-100 transition-colors"
+        className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-[32px] border overflow-hidden transition-all duration-300 bg-white dark:bg-[#1c1c1e] border-black/[0.08] dark:border-white/[0.12] text-[#1d1d1f] dark:text-[#f5f5f7] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#121214]/95 sticky top-0 z-20 backdrop-blur-md">
+        {/* Apple Header */}
+        <div className="flex items-center justify-between px-7 py-4 border-b border-black/[0.06] dark:border-white/[0.08] bg-white/80 dark:bg-[#1c1c1e]/80 sticky top-0 z-20 apple-glass">
           <div className="flex items-center gap-3">
-            <span className="p-2 rounded-xl border bg-neutral-100 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200">
-              <Gift className="w-5 h-5" />
+            <span className="w-8 h-8 rounded-full flex items-center justify-center bg-[#34c759]/15 text-[#34c759]">
+              <Gift className="w-4 h-4" />
             </span>
             <div>
-              <h2 className="text-base sm:text-lg font-bold tracking-tight flex items-center gap-2">
+              <h2 className="text-base font-bold tracking-tight flex items-center gap-2">
                 Free AI APIs & Starter Tiers
-                <span className="text-[10px] px-2 py-0.5 rounded-full border font-mono font-bold bg-neutral-100 text-neutral-700 border-neutral-200 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-800">
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold bg-[#34c759]/15 text-[#34c759]">
                   $0.00 Cost
                 </span>
               </h2>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-xs text-[#86868b] dark:text-[#a1a1a6]">
                 Verified zero-cost providers that allow you to build without entering a credit card.
               </p>
             </div>
@@ -139,67 +139,67 @@ export const FreeApiModal: React.FC<Props> = ({ isOpen, onClose, onOpenConcept }
           <div className="flex items-center gap-2">
             <button
               onClick={() => { onClose(); onOpenConcept(); }}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-medium transition-colors bg-neutral-100 hover:bg-neutral-200 border-neutral-200 text-neutral-800 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-800 dark:text-neutral-200"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-colors bg-black/[0.03] hover:bg-black/[0.06] dark:bg-white/[0.08] dark:hover:bg-white/[0.14] border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-[#f5f5f7]"
             >
               <span>View API Bubble</span>
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3.5 h-3.5 text-[#0071e3]" />
             </button>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
-              aria-label="Close modal"
+              className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-black/[0.05] hover:bg-black/[0.1] dark:bg-white/[0.1] dark:hover:bg-white/[0.18] text-[#86868b] dark:text-[#a1a1a6]"
+              aria-label="Close"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
         {/* Content */}
-        <div className="overflow-y-auto p-6 space-y-5 flex-1">
+        <div className="overflow-y-auto p-7 space-y-5 flex-1">
           {/* Quick Notice Banner */}
-          <div className="p-4 rounded-2xl border text-xs leading-relaxed bg-neutral-50 dark:bg-neutral-900/60 border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400">
-            <strong className="text-neutral-900 dark:text-white block mb-0.5">How do Free Tiers work?</strong>
+          <div className="p-4 rounded-2xl border text-xs leading-relaxed bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.04] dark:border-white/[0.06] text-[#6e6e73] dark:text-[#a1a1a6]">
+            <strong className="text-[#1d1d1f] dark:text-white block mb-0.5">How do Free Tiers work?</strong>
             AI providers give developers free rate-limited quotas (e.g. 15 requests/minute or 500k tokens/day) to build prototypes and learn. As long as you stay within the rate limit, you are never billed.
           </div>
 
           {/* Grid of Providers */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {FREE_PROVIDERS.map((prov) => (
               <div 
                 key={prov.name} 
-                className="p-5 rounded-2xl border flex flex-col justify-between space-y-3.5 transition-all bg-white hover:bg-neutral-50/60 border-neutral-200 dark:bg-[#151518] dark:hover:bg-[#18181c] dark:border-neutral-800 shadow-sm"
+                className="p-5 rounded-[24px] border flex flex-col justify-between space-y-4 transition-all bg-white hover:bg-black/[0.01] border-black/[0.06] hover:border-black/[0.12] dark:bg-[#161618] dark:hover:bg-[#1a1a1d] dark:border-white/[0.08] dark:hover:border-white/[0.14] shadow-sm hover:shadow-md"
               >
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <h3 className="font-bold text-sm text-neutral-900 dark:text-white">
+                    <h3 className="font-bold text-sm text-[#1d1d1f] dark:text-[#f5f5f7]">
                       {prov.name}
                     </h3>
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full border bg-neutral-100 text-neutral-700 border-neutral-200 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-800">
+                    <span className="text-[10px] font-medium px-2.5 py-0.5 rounded-full bg-[#34c759]/15 text-[#34c759]">
                       No Card Needed
                     </span>
                   </div>
 
-                  <p className="text-xs text-neutral-500 italic mb-3">
+                  <p className="text-xs text-[#86868b] italic mb-3">
                     "{prov.tagline}"
                   </p>
 
                   <div className="space-y-1.5 text-xs mb-3">
-                    <div className="p-2 rounded-xl border bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
-                      <span className="text-neutral-400 font-semibold block text-[10px] uppercase">Models:</span>
-                      <span className="text-neutral-800 dark:text-neutral-200 font-mono text-[11px]">{prov.models}</span>
+                    <div className="p-2.5 rounded-xl border bg-black/[0.02] dark:bg-white/[0.04] border-black/[0.04] dark:border-white/[0.06]">
+                      <span className="text-[#86868b] font-medium block text-[10px] uppercase">Models:</span>
+                      <span className="text-[#1d1d1f] dark:text-[#f5f5f7] font-mono text-[11px]">{prov.models}</span>
                     </div>
 
-                    <div className="p-2 rounded-xl border bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
-                      <span className="text-neutral-400 font-semibold block text-[10px] uppercase">Free Limit:</span>
-                      <span className="text-emerald-700 dark:text-emerald-400 font-medium text-[11px]">{prov.freeLimit}</span>
+                    <div className="p-2.5 rounded-xl border bg-black/[0.02] dark:bg-white/[0.04] border-black/[0.04] dark:border-white/[0.06]">
+                      <span className="text-[#86868b] font-medium block text-[10px] uppercase">Free Limit:</span>
+                      <span className="text-[#34c759] font-medium text-[11px]">{prov.freeLimit}</span>
                     </div>
                   </div>
 
                   <div>
-                    <span className="text-[11px] font-semibold text-neutral-600 dark:text-neutral-400 block mb-1">
+                    <span className="text-[11px] font-medium text-[#6e6e73] dark:text-[#a1a1a6] block mb-1">
                       Quick Setup:
                     </span>
-                    <ol className="list-decimal list-inside space-y-0.5 text-[11px] text-neutral-500">
+                    <ol className="list-decimal list-inside space-y-0.5 text-[11px] text-[#86868b]">
                       {prov.steps.map((st, i) => (
                         <li key={i}>{st}</li>
                       ))}
@@ -207,15 +207,15 @@ export const FreeApiModal: React.FC<Props> = ({ isOpen, onClose, onOpenConcept }
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-neutral-100 dark:border-neutral-850 flex items-center justify-between">
-                  <span className="text-[11px] text-neutral-400">
-                    Best for: <strong className="text-neutral-700 dark:text-neutral-300">{prov.bestFor}</strong>
+                <div className="pt-3 border-t border-black/[0.04] dark:border-white/[0.06] flex items-center justify-between">
+                  <span className="text-[11px] text-[#86868b]">
+                    Best for: <strong className="text-[#1d1d1f] dark:text-[#f5f5f7]">{prov.bestFor}</strong>
                   </span>
                   <a
                     href={prov.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-100 shadow-sm"
+                    className="flex items-center gap-1 px-4 py-1.5 rounded-full text-xs font-semibold transition-all bg-[#0071e3] hover:bg-[#0077ed] text-white shadow-sm"
                   >
                     <span>Get Key</span>
                     <ExternalLink className="w-3 h-3" />
@@ -226,13 +226,13 @@ export const FreeApiModal: React.FC<Props> = ({ isOpen, onClose, onOpenConcept }
           </div>
 
           {/* Security Rules */}
-          <div className="p-4 rounded-2xl border text-xs space-y-1.5 bg-neutral-50 dark:bg-neutral-900/60 border-neutral-200 dark:border-neutral-800">
-            <span className="font-bold text-neutral-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <div className="p-4 rounded-2xl border text-xs space-y-1.5 bg-black/[0.02] dark:bg-white/[0.03] border-black/[0.04] dark:border-white/[0.06]">
+            <span className="font-semibold text-[#1d1d1f] dark:text-white flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-[#34c759]" />
               API Security Best Practice
             </span>
-            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              Never commit your API keys to public GitHub repositories. Save them in a local <code className="px-1 rounded border bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 font-mono text-[11px]">.env</code> file that is listed in your <code className="px-1 rounded border bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 font-mono text-[11px]">.gitignore</code> so bots cannot steal your quotas.
+            <p className="text-[#6e6e73] dark:text-[#a1a1a6] leading-relaxed">
+              Never commit your API keys to public GitHub repositories. Save them in a local <code className="px-1.5 py-0.5 rounded-md border bg-white dark:bg-black border-black/[0.06] dark:border-white/[0.08] font-mono text-[11px]">.env</code> file that is listed in your <code className="px-1.5 py-0.5 rounded-md border bg-white dark:bg-black border-black/[0.06] dark:border-white/[0.08] font-mono text-[11px]">.gitignore</code> so bots cannot steal your quotas.
             </p>
           </div>
         </div>

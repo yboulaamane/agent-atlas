@@ -2,7 +2,7 @@ import React from 'react';
 import { LearningPath, LearningPathId } from '../types';
 import { 
   Compass, MessageSquare, Code, Bot, 
-  Map, List, Sun, Moon, Play, Pause, Sparkles, CheckCircle2, Gift 
+  Map, List, Sun, Moon, Play, Pause, Gift, Layers
 } from 'lucide-react';
 
 interface Props {
@@ -39,66 +39,66 @@ export const Navbar: React.FC<Props> = ({
   const isDark = theme === 'dark';
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b backdrop-blur-md transition-colors duration-200 bg-white/80 dark:bg-[#09090b]/80 border-neutral-200/80 dark:border-neutral-800/80 px-4 sm:px-6 py-3">
+    <header className="sticky top-0 z-40 w-full apple-glass border-b transition-colors duration-300 bg-white/80 dark:bg-black/75 border-black/[0.06] dark:border-white/[0.12] px-4 sm:px-8 py-2.5">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-        {/* Brand & Wordmark */}
+        {/* Apple Wordmark */}
         <div className="flex items-center justify-between w-full md:w-auto">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-neutral-900 dark:bg-neutral-50 text-white dark:text-neutral-900 flex items-center justify-center font-bold text-sm shadow-sm">
-              ▲
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-sm">
+              <Layers className="w-4 h-4" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-base tracking-tight text-neutral-900 dark:text-white">
-                  AgentAtlas
+                <span className="font-semibold text-sm tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7]">
+                  AI Playground
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border bg-neutral-100 text-neutral-600 border-neutral-200 dark:bg-neutral-900 dark:text-neutral-400 dark:border-neutral-800">
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-medium bg-black/[0.04] text-black/60 dark:bg-white/[0.1] dark:text-white/70">
                   2026
                 </span>
               </div>
-              <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
-                Interactive visual playground for AI & agents
+              <p className="text-[11px] text-[#86868b] dark:text-[#a1a1a6]">
+                Interactive guide to agents, harnesses & MCP
               </p>
             </div>
           </div>
 
-          {/* Mobile controls */}
-          <div className="flex md:hidden items-center gap-1.5">
+          {/* Mobile Actions */}
+          <div className="flex md:hidden items-center gap-2">
             <button
               onClick={onToggleTheme}
-              className="p-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300"
-              title="Toggle dark/light mode"
+              className="w-8 h-8 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.1] text-[#1d1d1f] dark:text-[#f5f5f7]"
+              aria-label="Toggle theme"
             >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </button>
             <button
               onClick={onOpenFreeApis}
-              className="px-2.5 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs font-semibold text-neutral-800 dark:text-neutral-200 flex items-center gap-1"
+              className="px-2.5 py-1 rounded-full text-xs font-medium bg-black/[0.04] dark:bg-white/[0.1] text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center gap-1"
             >
               <Gift className="w-3.5 h-3.5" />
               <span>Free APIs</span>
             </button>
             <button
               onClick={() => onToggleView(activeView === 'map' ? 'list' : 'map')}
-              className="p-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300"
+              className="w-8 h-8 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.1] text-[#1d1d1f] dark:text-[#f5f5f7]"
             >
-              {activeView === 'map' ? <List className="w-4 h-4" /> : <Map className="w-4 h-4" />}
+              {activeView === 'map' ? <List className="w-3.5 h-3.5" /> : <Map className="w-3.5 h-3.5" />}
             </button>
           </div>
         </div>
 
-        {/* Minimalist Learning Path Switcher */}
-        <div className="flex items-center gap-1 p-1 rounded-xl border overflow-x-auto max-w-full scrollbar-none bg-neutral-100/80 dark:bg-neutral-900/80 border-neutral-200 dark:border-neutral-800">
+        {/* Apple Segmented Pill Selector */}
+        <div className="flex items-center p-1 rounded-full border bg-black/[0.03] dark:bg-white/[0.08] border-black/[0.05] dark:border-white/[0.08] overflow-x-auto max-w-full scrollbar-none">
           {learningPaths.map((path) => {
             const isSelected = selectedPathId === path.id;
             return (
               <button
                 key={path.id}
                 onClick={() => onSelectPath(path.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+                className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all duration-200 ${
                   isSelected
-                    ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm font-semibold'
-                    : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                    ? 'bg-white dark:bg-[#2c2c2e] text-[#1d1d1f] dark:text-white shadow-sm font-semibold'
+                    : 'text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1d1d1f] dark:hover:text-white'
                 }`}
               >
                 {path.id === 'all' && <Compass className="w-3.5 h-3.5" />}
@@ -111,37 +111,37 @@ export const Navbar: React.FC<Props> = ({
           })}
         </div>
 
-        {/* Right Action Controls: Dark/White Toggle, Free APIs, View Switcher & Motion */}
-        <div className="hidden md:flex items-center gap-2.5">
+        {/* Right Controls: Apple Minimalist Toolset */}
+        <div className="hidden md:flex items-center gap-2">
           {/* Free APIs Button */}
           <button
             onClick={onOpenFreeApis}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-medium transition-all bg-neutral-100 hover:bg-neutral-200 border-neutral-200 text-neutral-800 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-800 dark:text-neutral-200"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all bg-black/[0.04] hover:bg-black/[0.08] dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-[#1d1d1f] dark:text-[#f5f5f7]"
           >
-            <Gift className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+            <Gift className="w-3.5 h-3.5 text-[#34c759]" />
             <span>Free APIs</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded font-mono font-bold bg-neutral-200 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">$0</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full font-mono font-semibold bg-black/10 dark:bg-white/15">$0</span>
           </button>
 
-          {/* Map vs List Switcher */}
-          <div className="flex items-center p-0.5 rounded-xl border bg-neutral-100/80 dark:bg-neutral-900/80 border-neutral-200 dark:border-neutral-800">
+          {/* View Switcher Segment */}
+          <div className="flex items-center p-0.5 rounded-full border bg-black/[0.03] dark:bg-white/[0.08] border-black/[0.05] dark:border-white/[0.08]">
             <button
               onClick={() => onToggleView('map')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 activeView === 'map'
-                  ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm font-semibold'
-                  : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-[#2c2c2e] text-[#1d1d1f] dark:text-white shadow-sm font-semibold'
+                  : 'text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1d1d1f] dark:hover:text-white'
               }`}
             >
               <Map className="w-3.5 h-3.5" />
-              Map
+              Canvas
             </button>
             <button
               onClick={() => onToggleView('list')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 activeView === 'list'
-                  ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm font-semibold'
-                  : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-[#2c2c2e] text-[#1d1d1f] dark:text-white shadow-sm font-semibold'
+                  : 'text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1d1d1f] dark:hover:text-white'
               }`}
             >
               <List className="w-3.5 h-3.5" />
@@ -152,20 +152,20 @@ export const Navbar: React.FC<Props> = ({
           {/* Theme Toggle (Dark / Light) */}
           <button
             onClick={onToggleTheme}
-            className="p-2 rounded-xl border transition-colors bg-white hover:bg-neutral-100 border-neutral-200 text-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-800 dark:text-neutral-300"
-            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-black/[0.04] hover:bg-black/[0.08] dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-[#1d1d1f] dark:text-[#f5f5f7]"
+            title={isDark ? "Switch to Light appearance" : "Switch to Dark appearance"}
             aria-label="Toggle theme"
           >
-            {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-neutral-700" />}
+            {isDark ? <Sun className="w-3.5 h-3.5 text-[#ffd60a]" /> : <Moon className="w-3.5 h-3.5 text-[#1d1d1f]" />}
           </button>
 
-          {/* Motion Toggle Button */}
+          {/* Motion Toggle */}
           <button
             onClick={onToggleMotion}
-            className="p-2 rounded-xl border transition-colors bg-white hover:bg-neutral-100 border-neutral-200 text-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-800 dark:text-neutral-300"
-            title={reducedMotion ? "Resume float motion" : "Pause float motion"}
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors bg-black/[0.04] hover:bg-black/[0.08] dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-[#86868b] dark:text-[#a1a1a6]"
+            title={reducedMotion ? "Resume physics" : "Pause physics"}
           >
-            {reducedMotion ? <Play className="w-3.5 h-3.5 text-neutral-500" /> : <Pause className="w-3.5 h-3.5 text-neutral-500" />}
+            {reducedMotion ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
           </button>
         </div>
       </div>

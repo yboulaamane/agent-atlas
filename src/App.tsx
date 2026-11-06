@@ -104,7 +104,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col transition-colors duration-200 bg-[#fafafa] text-neutral-900 dark:bg-[#09090b] dark:text-neutral-100 selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-neutral-900">
+    <div className="min-h-screen flex flex-col transition-colors duration-300 bg-[#f5f5f7] text-[#1d1d1f] dark:bg-[#000000] dark:text-[#f5f5f7] selection:bg-[#0071e3] selection:text-white">
       {/* Top Header */}
       <Navbar
         activeView={activeView}
@@ -147,22 +147,22 @@ export function App() {
             />
 
             {/* Minimalist Cards Below Map */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-              <div className="p-4 rounded-2xl border transition-colors bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm">
-                <span className="font-bold text-neutral-900 dark:text-white block mb-0.5">Explore Floating Nodes</span>
-                <p className="text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
+              <div className="p-4 rounded-2xl apple-card-light dark:apple-card-dark transition-all">
+                <span className="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] block mb-1">Explore Floating Nodes</span>
+                <p className="text-[#86868b] dark:text-[#a1a1a6] leading-relaxed">
                   Click any bubble to view 5-part cards: plain-language explanation, everyday analogy, animated demo, real-world context, and challenge.
                 </p>
               </div>
-              <div className="p-4 rounded-2xl border transition-colors bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm">
-                <span className="font-bold text-neutral-900 dark:text-white block mb-0.5">Tool Comparison Engine</span>
-                <p className="text-neutral-500 dark:text-neutral-400 leading-relaxed">
+              <div className="p-4 rounded-2xl apple-card-light dark:apple-card-dark transition-all">
+                <span className="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] block mb-1">Tool Comparison Engine</span>
+                <p className="text-[#86868b] dark:text-[#a1a1a6] leading-relaxed">
                   Switch between Claude, Cursor/Codex, ChatGPT, Grok, and Open Source to see how each tool exposes the underlying concept.
                 </p>
               </div>
-              <div className="p-4 rounded-2xl border transition-colors bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm">
-                <span className="font-bold text-neutral-900 dark:text-white block mb-0.5">Zero Cost & Client-Side</span>
-                <p className="text-neutral-500 dark:text-neutral-400 leading-relaxed">
+              <div className="p-4 rounded-2xl apple-card-light dark:apple-card-dark transition-all">
+                <span className="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] block mb-1">Zero Cost & Client-Side</span>
+                <p className="text-[#86868b] dark:text-[#a1a1a6] leading-relaxed">
                   100% private, runs offline in your browser without requiring logins, accounts, or live API keys.
                 </p>
               </div>
@@ -203,15 +203,17 @@ export function App() {
       />
 
       {/* Footer */}
-      <footer className="mt-12 border-t transition-colors bg-white dark:bg-[#09090b] border-neutral-200 dark:border-neutral-850 py-8 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500 dark:text-neutral-400">
+      <footer className="mt-12 border-t transition-colors bg-white/70 dark:bg-[#121214]/70 border-black/[0.06] dark:border-white/[0.08] backdrop-blur-xl py-8 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#86868b] dark:text-[#a1a1a6]">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-sm">▲</span>
+            <div className="w-6 h-6 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-[10px]">
+              AI
+            </div>
             <div>
-              <p className="font-semibold text-neutral-900 dark:text-white">
-                AgentAtlas • Interactive visual playground for modern AI & autonomous systems
+              <p className="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7]">
+                AI Playground • Interactive visual guide for modern AI & autonomous systems
               </p>
-              <p className="text-[11px] text-neutral-400 dark:text-neutral-500">
+              <p className="text-[11px] text-[#86868b] dark:text-[#a1a1a6]">
                 Covering the complete 2026 landscape: Harnesses, MCP, Loop Engineering, Swarms, RAG 2.0 & Free APIs.
               </p>
             </div>
@@ -220,23 +222,23 @@ export function App() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsFreeApiModalOpen(true)}
-              className="font-medium text-neutral-900 dark:text-white hover:underline transition-colors flex items-center gap-1"
+              className="font-medium text-[#1d1d1f] dark:text-[#f5f5f7] hover:underline transition-colors flex items-center gap-1"
             >
-              <Gift className="w-3.5 h-3.5" />
+              <Gift className="w-3.5 h-3.5 text-[#34c759]" />
               Free APIs Guide
             </button>
-            <span className="text-neutral-300 dark:text-neutral-800">|</span>
+            <span className="text-black/10 dark:text-white/10">|</span>
             {(masteredIds.length > 0 || challengeSolvedIds.length > 0) && (
               <>
                 <button
                   onClick={handleResetProgress}
-                  className="flex items-center gap-1 hover:text-rose-500 transition-colors"
+                  className="flex items-center gap-1 hover:text-[#ff3b30] transition-colors"
                   title="Reset localStorage progress"
                 >
                   <RefreshCw className="w-3 h-3" />
                   Reset Progress
                 </button>
-                <span className="text-neutral-300 dark:text-neutral-800">|</span>
+                <span className="text-black/10 dark:text-white/10">|</span>
               </>
             )}
             <span>Reviewed November 2026</span>

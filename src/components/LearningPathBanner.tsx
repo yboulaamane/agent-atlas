@@ -17,18 +17,18 @@ export const LearningPathBanner: React.FC<Props> = ({
 }) => {
   if (currentPath.id === 'all') {
     return (
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl border transition-colors bg-white dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm gap-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl border bg-neutral-100 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300">
-            <Compass className="w-4 h-4" />
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 rounded-[28px] border transition-colors bg-white dark:bg-[#1c1c1e] border-black/[0.06] dark:border-white/[0.08] shadow-sm gap-3">
+        <div className="flex items-center gap-3.5">
+          <div className="w-9 h-9 rounded-full flex items-center justify-center bg-black/[0.04] dark:bg-white/[0.08] text-[#1d1d1f] dark:text-[#f5f5f7]">
+            <Compass className="w-4 h-4 text-[#0071e3]" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-              Viewing All Concepts
-              <span className="text-xs font-normal text-neutral-500">({totalCount} interconnected terms)</span>
+            <h3 className="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center gap-2">
+              All Concepts
+              <span className="text-xs font-normal text-[#86868b]">({totalCount} interconnected terms)</span>
             </h3>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400">
-              Interactive floating graph showing how harnesses, MCP, RAG 2.0, swarms, and memory connect.
+            <p className="text-xs text-[#86868b] dark:text-[#a1a1a6]">
+              Interactive canvas illustrating how harnesses, MCP, RAG 2.0, swarms, and memory layers relate.
             </p>
           </div>
         </div>
@@ -36,9 +36,9 @@ export const LearningPathBanner: React.FC<Props> = ({
         <div className="flex items-center gap-2 text-xs">
           <button
             onClick={() => onSelectPath('chatbots')}
-            className="px-3 py-1.5 rounded-xl border text-neutral-700 dark:text-neutral-300 bg-neutral-50 dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors font-medium"
+            className="px-4 py-1.5 rounded-full border transition-colors font-medium bg-black/[0.03] hover:bg-black/[0.06] dark:bg-white/[0.08] dark:hover:bg-white/[0.14] border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-[#f5f5f7]"
           >
-            Start with Chatbot Basics →
+            Start with Chatbots →
           </button>
         </div>
       </div>
@@ -46,22 +46,22 @@ export const LearningPathBanner: React.FC<Props> = ({
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl border transition-colors bg-neutral-50 dark:bg-[#121214] border-neutral-200 dark:border-neutral-800 shadow-sm gap-3">
-      <div className="flex items-center gap-3">
-        <div className="p-2 rounded-xl border bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-white">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 rounded-[28px] border transition-colors bg-white dark:bg-[#1c1c1e] border-black/[0.06] dark:border-white/[0.08] shadow-sm gap-3">
+      <div className="flex items-center gap-3.5">
+        <div className="w-9 h-9 rounded-full flex items-center justify-center bg-[#0071e3]/10 text-[#0071e3]">
           <Sparkles className="w-4 h-4" />
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-neutral-700">
+            <span className="text-[10px] font-medium uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#0071e3]/10 text-[#0071e3]">
               Curated Path
             </span>
-            <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
+            <h3 className="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7]">
               {currentPath.title}
             </h3>
           </div>
-          <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
-            {currentPath.description} ({activeCount} concepts active).
+          <p className="text-xs text-[#86868b] dark:text-[#a1a1a6] mt-0.5">
+            {currentPath.description} ({activeCount} active).
           </p>
         </div>
       </div>
@@ -69,10 +69,10 @@ export const LearningPathBanner: React.FC<Props> = ({
       <div className="flex items-center gap-2 text-xs">
         <button
           onClick={() => onSelectPath('all')}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl font-medium transition-all shadow-sm bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-100"
+          className="flex items-center gap-1.5 px-4 py-1.5 rounded-full font-semibold transition-all shadow-sm bg-[#0071e3] hover:bg-[#0077ed] text-white"
         >
           <Compass className="w-3.5 h-3.5" />
-          Explore Everything ({totalCount})
+          Explore All ({totalCount})
         </button>
       </div>
     </div>
